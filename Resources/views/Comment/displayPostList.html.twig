@@ -1,0 +1,9 @@
+<div class="kitpages-usergenerated-comment-list">
+    {% for post in postList %}
+    <div class="kitpages-usergenerated-comment-post">
+        <h4>{{ post.title }}</h4>
+        <span>{{ post.userName }}</span> <span> {{ post.createdAt |date("m/d/Y") }} </span>
+        <pre>{{ post.content }}</pre>
+    </div>
+    {% endfor %}
+</div>

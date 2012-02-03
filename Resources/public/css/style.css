@@ -1,0 +1,74 @@
+.kitpages-usergenerated-comment-form label {
+    display: inline-block;
+    *display: inline;
+    width: 150px;
+    text-align: right;
+    vertical-align: top;
+    margin-right: 5px;
+}
+.kitpages-usergenerated-comment-form > div {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.kitpages-usergenerated-comment-form > div > input, .kitpages-usergenerated-comment-form > div > textarea  {
+    border: 1px solid #DDD;
+    background-color: #F0F0F0;
+    border-radius: 3px;
+}
+.kitpages-usergenerated-comment-form > div > input#form_title {
+    width: 400px;
+}
+.kitpages-usergenerated-comment-form > div > input#form_userEmail {
+    width: 300px;
+}
+
+.kitpages-usergenerated-comment-form > div > textarea {
+    height: 150px;
+    width: 400px;
+}
+.kitpages-usergenerated-comment-form input[type="submit"] {
+    margin-left: 155px;
+}
+
+.kitpages-usergenerated-comment-post {
+    margin-top: 3px;
+    padding: 5px;
+    border: 1px solid #DDDDDD;
+    background-color: #EEF4F4;
+}
+.kitpages-usergenerated-comment-post .kitpages-usergenerated-comment-post-title  {
+    color: #333;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-right: 20px;
+}
+.kitpages-usergenerated-comment-post .kitpages-usergenerated-comment-post-meta {
+    color: #999;
+    font-size: 0.9em;
+}
+.kitpages-usergenerated-comment-post pre {
+    overflow: auto;
+    padding: 5px;
+    border: 1px solid #D0D0D0;
+    background-color: #FFF;
+
+}
+.kitpages-usergenerated-comment-toolbar {
+    background-color: #F0F0F0;
+}
+.kitpages-usergenerated-comment-toolbar ul {
+    margin: 0px;
+    padding: 0px;
+}
+.kitpages-usergenerated-comment-toolbar ul li {
+    display: inline-block;
+    *display: inline;
+    list-style: none;
+}
+.kitpages-usergenerated-comment-toolbar ul li a {
+    display: block;
+    margin: 3px;
+    padding: 3px 10px;
+    background-color: #FFF;
+    border-radius: 3px;
+}

@@ -13,8 +13,8 @@
                 </ul>
             </div>
         {% endif %}
-        <h4>{{ post.title }}</h4>
-        <span>{{ post.userName }}</span> <span> {{ post.createdAt |date("m/d/Y") }} </span>
+        <span class="kitpages-usergenerated-comment-post-title">{{ post.title }}</span>
+        <span class="kitpages-usergenerated-comment-post-meta">{{ post.userName }} - {{ post.createdAt |date("m/d/Y") }} </span>
         <pre>{{ post.content }}</pre>
     </div>
     {% endfor %}

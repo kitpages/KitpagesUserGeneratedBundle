@@ -1,9 +1,11 @@
-<form action="{{ path ('KitpagesUserGeneratedBundle_comment_doNewPost') }}" method="post" {{ form_enctype(form) }}>
+<link rel="stylesheet" href="{{ asset ("bundles/kitpagesusergenerated/css/style.css") }}">
+<form class="kitpages-usergenerated-comment-form" action="{{ path ('KitpagesUserGeneratedBundle_comment_doNewPost') }}" method="post" {{ form_enctype(form) }}>
 
     {{ form_errors(form) }}
 
     {{ form_row(form.userName) }}
     {{ form_row(form.userEmail) }}
+    {{ form_row(form.title) }}
     {{ form_row(form.content) }}
 
     <div style="display: none;">

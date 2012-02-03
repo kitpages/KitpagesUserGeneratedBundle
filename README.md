@@ -25,7 +25,13 @@ Warning, it uses the KitpagesUtilBundle (which is standalone)
 
 app/console doctrine:schema:update  to update your db schema
 
-There is no configuration in config.yml
+configuration in config.yml
+---------------------------
+    kitpages_user_generated:
+        comment:
+            default_status: "validated"
+            from_email: "webmaster@mywebsite.fr"
+            admin_email_list: ["admin@mywebsite.fr"]
 
 User's guide
 ------------

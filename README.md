@@ -10,10 +10,10 @@ Current status
 Alpha state
 
 comming soon :
-- a moderation system
-- an administration
-- events
-- emails to the webmaster
+* a moderation system
+* an administration
+* events
+* emails to the webmaster
 
 Installation
 ------------

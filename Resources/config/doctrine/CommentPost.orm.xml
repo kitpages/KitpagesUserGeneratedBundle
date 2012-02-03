@@ -19,14 +19,20 @@
         </field>
         <field name="itemId" column="item_id" type="integer" nullable="true"/>
         <field name="itemClass" column="item_class" type="string" length="250" nullable="true" />
+        <field name="itemUrl" column="item_url" type="string" length="4000" nullable="true" />
 
         <field name="userId" column="user_id" type="integer" nullable="true"/>
         <field name="userName" column="user_name" type="string" length="250" nullable="false"/>
-        <field name="email" column="email" type="string" length="250" nullable="true"/>
-        <field name="url" column="url" type="string" length="2000" nullable="true"/>
+        <field name="userEmail" column="user_email" type="string" length="250" nullable="true"/>
+        <field name="userIp" column="user_ip" type="string" length="50" nullable="true"/>
+        <field name="userUrl" column="user_url" type="string" length="4000" nullable="true"/>
 
+        <field name="languageCode" column="language_code" type="string" length="5" nullable="true"/>
         <field name="title" column="title" type="string" length="250" nullable="true"/>
         <field name="content" column="content" type="string" length="8000" nullable="true"/>
+        <field name="extra" column="extra" type="array" nullable="true"/>
+
+        <field name="status" column="status" type="string" length="50" nullable="false"/>
 
         <!-- dates -->
         <field name="createdAt" type="datetime">

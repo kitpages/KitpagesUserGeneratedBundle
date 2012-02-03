@@ -1,6 +1,14 @@
 <form action="{{ path ('KitpagesUserGeneratedBundle_comment_doNewPost') }}" method="post" {{ form_enctype(form) }}>
 
-    {{ form_widget(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.userName) }}
+    {{ form_row(form.userEmail) }}
+    {{ form_row(form.content) }}
+
+    <div style="display: none;">
+    {{ form_rest(form) }}
+    </div>
 
     <input type="submit" />
 </form>

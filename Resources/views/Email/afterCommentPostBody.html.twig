@@ -1,0 +1,16 @@
+{% extends 'KitpagesUserGeneratedBundle::emailLayout.html.twig' %}
+{% block body %}
+    <h2>From</h2>
+    {{ "Comment from" | trans }} : {{ commentPost.userName }} ({{ commentPost.userId | default("no id") }})<br/>
+    {{ "Email" | trans }} : {{ commentPost.userEmail }}<br/>
+    {{ "Website"  | trans}} : {{ commentPost.userUrl }}<br/>
+    {{ "RemoteIp" | trans }} : {{ commentPost.userIp }}<br/>
+    <h2>Content</h2>
+    {{ "Status" | trans }} : {{ commentPost.status }}<br/>
+    {{"Title" | trans}} : {{ commentPost.title | default("no title") }}<br/>
+    <pre style="border: 1px solid #DDD; background-color: #F0F0F0; margin: 0px; padding: 0px;">
+        {{ commentPost.content }}
+    </pre>
+    <h2>{{ "Item associated" | trans }}</h2>
+    {{ "Item" }} : <a href="{{commentPost.itemUrl}}#kitpages-user-generated-comment-post-{{commentPost.id}}">{{commentPost.itemUrl}}#kitpages-user-generated-comment-post-{{commentPost.id}}</a><br/>
+{% endblock %}

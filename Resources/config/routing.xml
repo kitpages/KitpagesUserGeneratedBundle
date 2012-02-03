@@ -7,4 +7,8 @@
     <route id="KitpagesUserGeneratedBundle_comment_doNewPost" pattern="/do-new-post">
         <default key="_controller">KitpagesUserGeneratedBundle:Comment:doNewPost</default>
     </route>
+    <route id="KitpagesUserGeneratedBundle_comment_ajaxNextStatus" pattern="/ajax-next-status">
+        <default key="_controller">KitpagesUserGeneratedBundle:Comment:ajaxNextStatus</default>
+    </route>
+
 </routes>

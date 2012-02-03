@@ -4,6 +4,8 @@ namespace Kitpages\UserGeneratedBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
+use Kitpages\UserGeneratedBundle\Entity\CommentPost;
+
 /**
  * CommentPostRepository
  *
@@ -12,15 +14,23 @@ use Doctrine\ORM\EntityRepository;
  */
 class CommentPostRepository extends EntityRepository
 {
-    public function findByItemReference($itemReference, $order = 'desc', $limit = null, $offset = null)
+    public function findByItemReference($itemReference, $status = null, $order = 'desc', $limit = null, $offset = null)
     {
+        $dql = "
+            SELECT p
+            FROM KitpagesUserGeneratedBundle:CommentPost p
+            WHERE p.itemReference = :itemReference
+        ";
+        if ($status) {
+            $dql .= " AND p.status = :status ";
+        }
+        $dql .= " ORDER BY p.position ".$order;
         $query = $this->_em
-            ->createQuery("
-                SELECT p
-                FROM KitpagesUserGeneratedBundle:CommentPost p
-                WHERE p.itemReference = :itemReference
-                ORDER BY p.position ".$order)
+            ->createQuery($dql)
             ->setParameter("itemReference", $itemReference);
+        if ($status) {
+            $query->setParameter("status", $status);
+        }
         if ($limit !== null) {
             $query->setMaxResults($limit);
         }

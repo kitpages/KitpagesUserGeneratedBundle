@@ -4,7 +4,9 @@ namespace Kitpages\UserGeneratedBundle\Entity;
 
 class CommentPost
 {
-
+    const STATUS_VALIDATED="validated";
+    const STATUS_REFUSED="refused";
+    const STATUS_WAITING_VALIDATION="waiting_validation";
     /**
      * @var integer $position
      */
@@ -319,5 +321,180 @@ class CommentPost
     public function getItemClass()
     {
         return $this->itemClass;
+    }
+    /**
+     * @var string $itemUrl
+     */
+    private $itemUrl;
+
+    /**
+     * @var string $userEmail
+     */
+    private $userEmail;
+
+    /**
+     * @var string $userIp
+     */
+    private $userIp;
+
+    /**
+     * @var string $userUrl
+     */
+    private $userUrl;
+
+    /**
+     * @var string $languageCode
+     */
+    private $languageCode;
+
+    /**
+     * @var collection $extra
+     */
+    private $extra;
+
+
+    /**
+     * Set itemUrl
+     *
+     * @param string $itemUrl
+     */
+    public function setItemUrl($itemUrl)
+    {
+        $this->itemUrl = $itemUrl;
+    }
+
+    /**
+     * Get itemUrl
+     *
+     * @return string 
+     */
+    public function getItemUrl()
+    {
+        return $this->itemUrl;
+    }
+
+    /**
+     * Set userEmail
+     *
+     * @param string $userEmail
+     */
+    public function setUserEmail($userEmail)
+    {
+        $this->userEmail = $userEmail;
+    }
+
+    /**
+     * Get userEmail
+     *
+     * @return string 
+     */
+    public function getUserEmail()
+    {
+        return $this->userEmail;
+    }
+
+    /**
+     * Set userIp
+     *
+     * @param string $userIp
+     */
+    public function setUserIp($userIp)
+    {
+        $this->userIp = $userIp;
+    }
+
+    /**
+     * Get userIp
+     *
+     * @return string 
+     */
+    public function getUserIp()
+    {
+        return $this->userIp;
+    }
+
+    /**
+     * Set userUrl
+     *
+     * @param string $userUrl
+     */
+    public function setUserUrl($userUrl)
+    {
+        $this->userUrl = $userUrl;
+    }
+
+    /**
+     * Get userUrl
+     *
+     * @return string 
+     */
+    public function getUserUrl()
+    {
+        return $this->userUrl;
+    }
+
+    /**
+     * Set languageCode
+     *
+     * @param string $languageCode
+     */
+    public function setLanguageCode($languageCode)
+    {
+        $this->languageCode = $languageCode;
+    }
+
+    /**
+     * Get languageCode
+     *
+     * @return string 
+     */
+    public function getLanguageCode()
+    {
+        return $this->languageCode;
+    }
+
+    /**
+     * Set extra
+     *
+     * @param  $extra
+     */
+    public function setExtra($extra)
+    {
+        $this->extra = $extra;
+    }
+
+    /**
+     * Get extra
+     *
+     * @return array
+     */
+    public function getExtra()
+    {
+        return $this->extra;
+    }
+    /**
+     * @var string $status
+     */
+    private $status;
+
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

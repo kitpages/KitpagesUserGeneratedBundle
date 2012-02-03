@@ -3,7 +3,9 @@
 namespace Kitpages\UserGeneratedBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+
 
 /**
  * This is the class that validates and merges configuration from your app/config files
@@ -20,10 +22,42 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('kitpages_user_generated');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $this->addCommentSection($rootNode);
 
         return $treeBuilder;
     }
+
+    /**
+     * Parses the kitpages_user_generated sections
+     * Example for yaml driver:
+     * kitpages_user_generated:
+     *     comment:
+     *         default_status: "validated"
+     *
+     * @param ArrayNodeDefinition $node
+     * @return void
+     */
+    private function addCommentSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode("comment")
+                    ->children()
+                        ->scalarNode('default_status')->defaultValue("validated")->end()
+                        ->scalarNode('from_email')->cannotBeEmpty()->isRequired()->end()
+                        ->arrayNode('admin_email_list')
+                            ->isRequired()
+                            ->requiresAtLeastOneElement()
+                            ->beforeNormalization()
+                                ->ifTrue(function($v){ return !is_array($v); })
+                                ->then(function($v){ return array($v); })
+                            ->end()
+                            ->prototype('scalar')->end()
+                        ->end()
+
+                    ->end()
+                ->end()
+            ->end();
+    }
+
 }

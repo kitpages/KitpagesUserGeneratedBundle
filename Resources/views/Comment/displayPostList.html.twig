@@ -1,9 +1,33 @@
 <div class="kitpages-usergenerated-comment-list">
     {% for post in postList %}
     <div class="kitpages-usergenerated-comment-post">
+        <a name="kitpages-user-generated-comment-post-{{post.id}}"></a>
+        {% if is_granted('ROLE_USER_GENERATED_ADMIN') %}
+            <div class="kitpages-usergenerated-comment-toolbar">
+                <ul>
+                    <li>
+                        <a class="kitpages-usergenerated-comment-toolbar-status" href="{{ path ('KitpagesUserGeneratedBundle_comment_ajaxNextStatus', {"postId": post.id}) }}">
+                            {{ post.status | default('null') }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
         <h4>{{ post.title }}</h4>
         <span>{{ post.userName }}</span> <span> {{ post.createdAt |date("m/d/Y") }} </span>
         <pre>{{ post.content }}</pre>
     </div>
     {% endfor %}
 </div>
+{% if is_granted('ROLE_USER_GENERATED_ADMIN') %}
+<script>
+(function() {
+    $(".kitpages-usergenerated-comment-post .kitpages-usergenerated-comment-toolbar-status").click(function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $(this).html("loading");
+        $(this).load($(this).attr("href"));
+    });
+})();
+</script>
+{% endif %}

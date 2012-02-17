@@ -1,0 +1,10 @@
+<div class="kitpages-usergenerated-rating-like-quantity-list">
+    {% for result in resultList %}
+        {% if attribute(scoreList, result.score) is defined %}
+            <div class="kitpages-usergenerated-rating-like-quantity">
+                <span class="kitpages-usergenerated-rating-like-quantity-value">{{ result.quantity }}</span>
+                <span class="kitpages-usergenerated-rating-like-quantity-score">{{ attribute(scoreList, result.score) }}</span>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>

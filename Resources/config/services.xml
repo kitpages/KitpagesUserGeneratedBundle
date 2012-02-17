@@ -20,6 +20,9 @@
 
             <tag name="kernel.event_listener" event="kitpages_user_generated.event.after_comment_post" method="afterCommentPostEvent" />
         </service>
+        <service id="kitpages_cms.twig.extension.rating" class="Kitpages\UserGeneratedBundle\Twig\Extension\RatingExtension">
+            <tag name="twig.extension" />
+        </service>
     </services>
 
 </container>

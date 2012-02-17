@@ -1,0 +1,16 @@
+{% if is_granted('ROLE_USER_GENERATED_RATING_USER') %}
+<link rel="stylesheet" href="{{ asset ("bundles/kitpagesusergenerated/css/style.css") }}">
+<form class="kitpages-usergenerated-rating-default-form kitpages-usergenerated-rating-default-form-{{form.itemReference.vars.value}}" action="{{ path ('KitpagesUserGeneratedBundle_rating_doNewScore') }}" method="post" {{ form_enctype(form) }}>
+
+    {{ form_errors(form) }}
+
+    {#{{ form_row(form.userName) }}#}
+    {{ form_row(form.score) }}
+
+    <div style="display: none;">
+    {{ form_rest(form) }}
+    </div>
+
+    <input type="submit" />
+</form>
+{% endif %}

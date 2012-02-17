@@ -11,4 +11,9 @@
         <default key="_controller">KitpagesUserGeneratedBundle:Comment:ajaxNextStatus</default>
     </route>
 
+    <route id="KitpagesUserGeneratedBundle_rating_doNewScore" pattern="/do-new-score">
+        <default key="_controller">KitpagesUserGeneratedBundle:Rating:doNewScore</default>
+    </route>
+
+
 </routes>

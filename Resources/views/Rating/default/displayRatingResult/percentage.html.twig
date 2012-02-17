@@ -1,0 +1,10 @@
+<div class="kitpages-usergenerated-rating-default-percent-list">
+    {% for result in resultList %}
+        {% if attribute(scoreList, result.score) is defined %}
+            <div class="kitpages-usergenerated-rating-default-percent">
+                <span class="kitpages-usergenerated-rating-default-percent-score">{{ attribute(scoreList, result.score) }}</span>
+                <span class="kitpages-usergenerated-rating-default-percent-value">{{ result.percentage|kit_usergenerate_round }} %</span>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>

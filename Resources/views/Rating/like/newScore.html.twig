@@ -1,0 +1,31 @@
+{% if is_granted('ROLE_USER_GENERATED_RATING_USER') %}
+<link rel="stylesheet" href="{{ asset ("bundles/kitpagesusergenerated/css/style.css") }}">
+{% if form.score.vars.value == 1 %}
+    {% set scoreValue = 0 %}
+    <a href='#' class="kitpages-usergenerated-rating-like-link" data-kitpages-usergenerated-rating-like-itemReference="{{form.itemReference.vars.value}}" >I not like</a>
+{% else %}
+    {% set scoreValue = 1 %}
+    <a href='#' class="kitpages-usergenerated-rating-like-link" data-kitpages-usergenerated-rating-like-itemReference="{{form.itemReference.vars.value}}" >I like</a>
+{% endif %}
+<div style='display:none'>
+<form class="kitpages-usergenerated-rating-like-form kitpages-usergenerated-rating-like-form-{{form.itemReference.vars.value}}" action="{{ path ('KitpagesUserGeneratedBundle_rating_doNewScore') }}" method="post" {{ form_enctype(form) }}>
+{{scoreValue}}
+    {{ form_errors(form) }}
+    {{ form_widget(form.score) }}
+
+    {{ form_rest(form) }}
+
+    <input type="submit" />
+</form>
+</div>
+<script>
+(function(){
+    $('.kitpages-usergenerated-rating-like-link').click(function(){
+            var itemReference = $(this).attr('data-kitpages-usergenerated-rating-like-itemReference');
+            $('.kitpages-usergenerated-rating-like-form-' + itemReference + ' #form_score').val({{scoreValue}});
+            $('.kitpages-usergenerated-rating-like-form-' + itemReference).submit();
+    });
+})();
+</script>
+
+{% endif %}

@@ -17,25 +17,25 @@ class RatingScoreRepository extends EntityRepository
 
 
     public function findByItemReferenceAndUserName($itemReference, $scoreType, $userName)
-        {
-            $dql = "
-                SELECT rs
-                FROM KitpagesUserGeneratedBundle:RatingScore rs
-                WHERE rs.itemReference = :itemReference
-                AND  rs.userName = :userName
-                AND rs.scoreType = :scoreType
-            ";
+    {
+        $dql = "
+            SELECT rs
+            FROM KitpagesUserGeneratedBundle:RatingScore rs
+            WHERE rs.itemReference = :itemReference
+            AND  rs.userName = :userName
+            AND rs.scoreType = :scoreType
+        ";
 
-             $query = $this->_em
-                ->createQuery($dql)
-                ->setParameter("itemReference", $itemReference)
-                ->setParameter("userName", $userName)
-                ->setParameter("scoreType", $scoreType);
+         $query = $this->_em
+            ->createQuery($dql)
+            ->setParameter("itemReference", $itemReference)
+            ->setParameter("userName", $userName)
+            ->setParameter("scoreType", $scoreType);
 
-            return $query->getResult();
-        }
+        return $query->getResult();
+    }
 
-    public function averageByItemReference($itemReference, $scoreType)
+    public function average($itemReference, $scoreType)
     {
         $dql = "
             SELECT AVG(rs.score) as average
@@ -58,7 +58,7 @@ class RatingScoreRepository extends EntityRepository
         }
     }
 
-    public function quantityScoreByItemReference($itemReference, $scoreType)
+    public function quantityByScore($itemReference, $scoreType)
     {
         $dql = "
             SELECT COUNT(rs.score) as quantity, rs.score as score
@@ -75,7 +75,7 @@ class RatingScoreRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function percentageScoreByItemReference($itemReference, $scoreType)
+    public function percentageByScore($itemReference, $scoreType)
     {
 
         $dql = "
@@ -110,6 +110,23 @@ class RatingScoreRepository extends EntityRepository
         } else {
             return array();
         }
+    }
+
+    public function quantityByItemReferenceScoreTypeScore()
+    {
+        $dql = "
+            SELECT
+              COUNT(rs.score) as quantity,
+              rs.itemReference as itemReference,
+              rs.scoreType as scoreType,
+              rs.score as score
+            FROM KitpagesUserGeneratedBundle:RatingScore rs
+            GROUP BY rs.itemReference, rs.scoreType, rs.score
+        ";
+
+         $query = $this->_em
+            ->createQuery($dql);
+        return $query->getResult();
     }
 
 

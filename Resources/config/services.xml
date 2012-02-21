@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="kitpages_user_generated.emailManager.class">Kitpages\UserGeneratedBundle\Service\EmailManager</parameter>
+        <parameter key="kitpages_user_generated.ratingManager.class">Kitpages\UserGeneratedBundle\Service\RatingManager</parameter>
     </parameters>
 
     <services>
@@ -19,6 +20,11 @@
             <argument>%kitpages_user_generated.comment.admin_email_list%</argument>
 
             <tag name="kernel.event_listener" event="kitpages_user_generated.event.after_comment_post" method="afterCommentPostEvent" />
+        </service>
+        <service id="kitpages_user_generated.ratingManager" class="%kitpages_user_generated.ratingManager.class%">
+            <tag name="kernel.event_listener" event="kitpages_user_generated.event.on_update_rating_score" method="onUpdateRatingScore" />
+            <tag name="kernel.event_listener" event="kitpages_user_generated.event.after_rating_score" method="afterRatingScore" />
+            <argument type="service" id="doctrine"/>
         </service>
         <service id="kitpages_cms.twig.extension.rating" class="Kitpages\UserGeneratedBundle\Twig\Extension\RatingExtension">
             <tag name="twig.extension" />

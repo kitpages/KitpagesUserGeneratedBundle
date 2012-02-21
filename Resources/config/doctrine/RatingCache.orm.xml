@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Kitpages\UserGeneratedBundle\Entity\RatingCache" repository-class="Kitpages\UserGeneratedBundle\Repository\RatingCacheRepository" table="usergenerated_ratingcache">
+
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="itemReference" column="item_reference" type="string" unique="false" length="250" nullable="false"/>
+
+        <field name="scoreType" column="score_type" type="string" length="250" nullable="true"/>
+        <field name="score" column="score" type="float" nullable="true"/>
+        <field name="quantity" column="quantity" type="integer" nullable="true"/>
+        <field name="scoreTotal" column="score_total" type="float" nullable="true"/>
+        <field name="quantityTotal" column="quantity_total" type="integer" nullable="true"/>
+
+        <!-- dates -->
+        <field name="createdAt" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" type="datetime">
+            <gedmo:timestampable on="update"/>
+        </field>
+
+    </entity>
+
+</doctrine-mapping>

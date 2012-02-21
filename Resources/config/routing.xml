@@ -15,5 +15,8 @@
         <default key="_controller">KitpagesUserGeneratedBundle:Rating:doNewScore</default>
     </route>
 
+    <route id="KitpagesUserGeneratedBundle_rating_initRatingCache" pattern="/initRatingCache">
+        <default key="_controller">KitpagesUserGeneratedBundle:Rating:initRatingCache</default>
+    </route>
 
 </routes>

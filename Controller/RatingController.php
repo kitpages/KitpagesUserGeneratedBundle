@@ -20,6 +20,13 @@ class RatingController extends Controller
     const DISPLAY_RESULT_TYPE_AVERAGE="average";
     const DISPLAY_RESULT_TYPE_QUANTITY="quantity";
 
+    public function initRatingCacheAction() {
+        $ratingManager=$this->get('kitpages_user_generated.ratingManager');
+        $ratingManager->createAllRatingCache();
+        return new Response();
+    }
+
+
     public function displayRatingResultAction(
         $itemReference,
         $scoreList = array(),
@@ -28,15 +35,15 @@ class RatingController extends Controller
     )
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $repo = $em->getRepository('KitpagesUserGeneratedBundle:RatingScore');
+        $repo = $em->getRepository('KitpagesUserGeneratedBundle:RatingCache');
 
         $resultList = array();
         if ($displayResultType == self::DISPLAY_RESULT_TYPE_AVERAGE) {
-            $resultList = $repo->averageByItemReference($itemReference, $scoreType);
+            $resultList = $repo->average($itemReference, $scoreType);
         } elseif ($displayResultType == self::DISPLAY_RESULT_TYPE_PERCENTAGE) {
-            $resultList = $repo->percentageScoreByItemReference($itemReference, $scoreType);
+            $resultList = $repo->percentageByScore($itemReference, $scoreType);
         } elseif ($displayResultType == self::DISPLAY_RESULT_TYPE_QUANTITY) {
-            $resultList = $repo->quantityScoreByItemReference($itemReference, $scoreType);
+            $resultList = $repo->quantityByScore($itemReference, $scoreType);
         }
 
         return $this->render(
@@ -154,6 +161,10 @@ class RatingController extends Controller
                 );
 
                 if ( $check ) {
+
+                    $eventDispatcher = $this->get("event_dispatcher");
+                    $event = new UserGeneratedEvent();
+
                     $em = $this->getDoctrine()->getEntityManager();
                     $repo = $em->getRepository('KitpagesUserGeneratedBundle:RatingScore');
 
@@ -162,8 +173,10 @@ class RatingController extends Controller
                         $data["scoreType"],
                         $data['userName']
                     );
-                    if (count($score) > 0 ){
+                    if (count($score) > 0 ) {
                         $score = $score[0];
+                        $event->set("ratingScore", $score);
+                        $eventDispatcher->dispatch(KitpagesUserGeneratedEvents::ON_UPDATE_RATING_SCORE, $event);
                     }
                     if (!($score instanceof RatingScore)) {
                         $score = new RatingScore();
@@ -183,8 +196,6 @@ class RatingController extends Controller
                     $score->setUserEmail($data['userEmail']);
                     $score->setUserUrl($data['userUrl']);
 
-                    $eventDispatcher = $this->get("event_dispatcher");
-                    $event = new UserGeneratedEvent();
                     $event->set("ratingScore", $score);
                     $eventDispatcher->dispatch(KitpagesUserGeneratedEvents::ON_RATING_SCORE, $event);
 
@@ -202,6 +213,7 @@ class RatingController extends Controller
             }
         }
     }
+
 
     protected function getScoreForm(
         $itemReference,

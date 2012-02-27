@@ -18,12 +18,47 @@ comming soon :
 Installation
 ------------
 
-installation in vendors (throught deps for example) and add
-it in app/autoload.php, app/appKernel.php, and routing.yml
+If you are using `DEPS` :
+    
+    [KitpagesUtilBundle]
+        git=https://github.com/kitpages/KitpagesUtilBundle.git
+        target=/bundles/Kitpages/UtilBundle
+        
+    [KitpagesUserGeneratedBundle]
+        git=https://github.com/kitpages/KitpagesUserGeneratedBundle.git
+        target=/bundles/Kitpages/UserGeneratedBundle
 
-Warning, it uses the KitpagesUtilBundle (which is standalone)
+Add `Kitpages` namespace to your autoloader :
 
-app/console doctrine:schema:update  to update your db schema
+``` php
+<?php // app/autoload.php
+
+$loader->registerNamespaces(array(
+    // ...
+    'Kitpages' => __DIR__.'/../vendor/bundles',
+));
+```
+
+Enable the bundles in your kernel :
+
+``` php 
+<?php // app/AppKernel.php
+
+public function registerBundles()
+{
+    $bundles = array(
+        // ...
+        new Kitpages\UtilBundle\KitpagesUtilBundle(),
+        new Kitpages\UtilBundle\KitpagesUserGeneratedBundle(),
+    );
+}
+```
+
+Then update your database schema :
+
+``` bash
+php app/console doctrine:schema:update
+```
 
 configuration in config.yml
 ---------------------------
@@ -39,6 +74,7 @@ User's guide
 If you want to add a comment system in a given page, you should add this code
 wherever you want in your twig template :
 
+``` html
     <h3>Form to add a comment</h3>
     {% render 'KitpagesUserGeneratedBundle:Comment:newPost' with {
         'itemReference': 'myItem'
@@ -47,6 +83,7 @@ wherever you want in your twig template :
     {% render 'KitpagesUserGeneratedBundle:Comment:displayPostList' with {
         'itemReference': 'myItem'
     } %}
+```
 
-the "itemReference" parameter is a reference to a comment list. For example if you
+The "itemReference" parameter is a reference to a comment list. For example if you
 want comments on the product #45 of your shop, you can use "product-45" as itemReference

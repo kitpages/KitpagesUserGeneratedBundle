@@ -54,6 +54,14 @@ public function registerBundles()
 }
 ```
 
+Import the routing file :
+
+``` yaml
+# app/config/routing.yml
+KitpagesUserGeneratedBundle:
+    resource: "@KitpagesUserGeneratedBundle/Resources/config/routing.xml"
+```
+
 Then update your database schema :
 
 ``` bash
@@ -75,14 +83,14 @@ If you want to add a comment system in a given page, you should add this code
 wherever you want in your twig template :
 
 ``` html
-    <h3>Form to add a comment</h3>
-    {% render 'KitpagesUserGeneratedBundle:Comment:newPost' with {
-        'itemReference': 'myItem'
-    } %}
-    <h3>commentList</h3>
-    {% render 'KitpagesUserGeneratedBundle:Comment:displayPostList' with {
-        'itemReference': 'myItem'
-    } %}
+<h3>Form to add a comment</h3>
+{% render 'KitpagesUserGeneratedBundle:Comment:newPost' with {
+    'itemReference': 'myItem'
+} %}
+<h3>commentList</h3>
+{% render 'KitpagesUserGeneratedBundle:Comment:displayPostList' with {
+    'itemReference': 'myItem'
+} %}
 ```
 
 The "itemReference" parameter is a reference to a comment list. For example if you

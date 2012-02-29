@@ -46,7 +46,9 @@ Add `Kitpages` namespace to your autoloader :
 
 $loader->registerNamespaces(array(
     // ...
-    'Kitpages' => __DIR__.'/../vendor/bundles',
+    'Gedmo'     => __DIR__.'/../vendor/gedmo-doctrine-extensions/lib',
+    'Stof'      => __DIR__.'/../vendor/bundles',
+    'Kitpages'  => __DIR__.'/../vendor/bundles',
 ));
 ```
 
@@ -59,6 +61,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
+        new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         new Kitpages\UtilBundle\KitpagesUtilBundle(),
         new Kitpages\UtilBundle\KitpagesUserGeneratedBundle(),
     );

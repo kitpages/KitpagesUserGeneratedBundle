@@ -1,19 +1,22 @@
 KitpagesUserGeneratedBundle
-==================
+===========================
 
 Used for common user generated contents like comments, rating,...
 
-For the moment there is only comments.
+For the moment there is only comments with the following features :
+
+* moderation
+* email to webmaster
+
+URL : http://www.kitpages.fr/fr/cms/108/kitpagesusergeneratedbundle (in french)
 
 Current status
 -------------
-Alpha state
+Beta state
 
 comming soon :
-* a moderation system
+
 * an administration
-* events
-* emails to the webmaster
 
 Installation
 ------------

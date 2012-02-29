@@ -148,7 +148,11 @@ class CommentController extends Controller
                     $comment->setUserEmail($data['userEmail']);
                     $comment->setUserUrl($data['userUrl']);
 
-                    $defaultStatus = $this->container->getParameter('kitpages_user_generated.comment.default_status');
+                    if ($data['userEmail']) {
+                        $defaultStatus = $this->container->getParameter('kitpages_user_generated.comment.default_status');
+                    } else {
+                        $defaultStatus = CommentPost::STATUS_DONT_SAVE;
+                    }
                     $comment->setStatus($defaultStatus);
 
                     $eventDispatcher = $this->get("event_dispatcher");
@@ -157,11 +161,15 @@ class CommentController extends Controller
                     $eventDispatcher->dispatch(KitpagesUserGeneratedEvents::ON_COMMENT_POST, $event);
 
                     if (! $event->isDefaultPrevented() ) {
-                        $em = $this->getDoctrine()->getEntityManager();
-                        $em->persist($comment);
-                        $em->flush();
-                        $this->getRequest()->getSession()->setFlash("notice", $trans->trans("comment saved"));
-                        $eventDispatcher->dispatch(KitpagesUserGeneratedEvents::AFTER_COMMENT_POST, $event);
+                        if ($comment->getStatus() != CommentPost::STATUS_DONT_SAVE) {
+                            $em = $this->getDoctrine()->getEntityManager();
+                            $em->persist($comment);
+                            $em->flush();
+                            $this->getRequest()->getSession()->setFlash("notice", $trans->trans("comment saved"));
+                            $eventDispatcher->dispatch(KitpagesUserGeneratedEvents::AFTER_COMMENT_POST, $event);
+                        } else {
+                            $this->getRequest()->getSession()->setFlash("notice", $trans->trans("comment rejected"));
+                        }
                     }
 
                     return $this->redirect($data["targetUrl"]);

@@ -7,6 +7,7 @@ class CommentPost
     const STATUS_VALIDATED="validated";
     const STATUS_REFUSED="refused";
     const STATUS_WAITING_VALIDATION="waiting_validation";
+    const STATUS_DONT_SAVE="dont_save";
     /**
      * @var integer $position
      */

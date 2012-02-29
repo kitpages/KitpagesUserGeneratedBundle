@@ -20,6 +20,14 @@ Installation
 
 If you are using `DEPS` :
     
+    [gedmo-doctrine-extensions]
+        git=http://github.com/l3pp4rd/DoctrineExtensions.git
+        target=/gedmo-doctrine-extensions
+    
+    [StofDoctrineExtensionsBundle]
+        git=https://github.com/stof/StofDoctrineExtensionsBundle.git
+        target=/bundles/Stof/DoctrineExtensionsBundle
+    
     [KitpagesUtilBundle]
         git=https://github.com/kitpages/KitpagesUtilBundle.git
         target=/bundles/Kitpages/UtilBundle
@@ -62,19 +70,36 @@ KitpagesUserGeneratedBundle:
     resource: "@KitpagesUserGeneratedBundle/Resources/config/routing.xml"
 ```
 
-Then update your database schema :
+Configure KitpagesUserGenerated :
+
+``` yaml
+# app/config/config.yml
+kitpages_user_generated:
+    comment:
+        default_status: "validated"
+        from_email: "webmaster@mywebsite.fr"
+        admin_email_list: ["admin@mywebsite.fr"]
+```
+
+Configure StofDoctrineExtensionsBundle :
+
+``` yaml
+# app/config/config.yml
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+            timestampable: true
+            sortable: true
+            sluggable: true
+            tree: true
+``` 
+
+And then update your database schema :
 
 ``` bash
 php app/console doctrine:schema:update
 ```
-
-configuration in config.yml
----------------------------
-    kitpages_user_generated:
-        comment:
-            default_status: "validated"
-            from_email: "webmaster@mywebsite.fr"
-            admin_email_list: ["admin@mywebsite.fr"]
 
 User's guide
 ------------

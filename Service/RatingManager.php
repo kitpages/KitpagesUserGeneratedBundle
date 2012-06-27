@@ -127,6 +127,7 @@ class RatingManager
             $ratingCache = new RatingCache();
             $ratingCache->initByRatingScore($ratingScore);
             $ratingCache->setQuantityTotal($quantityTotal);
+            $ratingCache->setScoreTotal(0);
             $em->persist($ratingCache);
             $em->flush();
         }

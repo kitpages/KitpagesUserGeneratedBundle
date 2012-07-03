@@ -34,6 +34,25 @@ class CommentController extends Controller
             )
         );
     }
+
+    public function displayNumberPostAction(
+        $itemReference
+    )
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $repo = $em->getRepository('KitpagesUserGeneratedBundle:CommentPost');
+
+        // number of post validated
+        $nbPost = $repo->countPostByItemReference($itemReference, CommentPost::STATUS_VALIDATED);
+
+        return $this->render(
+            "KitpagesUserGeneratedBundle:Comment:displayNumberPost.html.twig",
+            array(
+                'numberPost' => $nbPost
+            )
+        );
+    }
+
     public function ajaxNextStatusAction()
     {
         $commentPostId = $this->getRequest()->query->get("postId", null);

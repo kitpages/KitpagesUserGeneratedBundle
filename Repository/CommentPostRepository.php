@@ -40,4 +40,18 @@ class CommentPostRepository extends EntityRepository
         return $query->getResult();
     }
 
+    public function countPostByItemReference($itemReference, $status = null)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->setParameter("itemReference", $itemReference)
+            ->where('p.itemReference = :itemReference')
+            ->select('COUNT(p)');
+        if ($status) {
+            $qb->andWhere("p.status = :status ");
+            $qb->setParameter("status", $status);
+        }
+        return (int) $qb->getQuery()
+                        ->getSingleScalarResult();
+    }
+
 }

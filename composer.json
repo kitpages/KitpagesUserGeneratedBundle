@@ -1,0 +1,22 @@
+{
+    "name": "kitpages/user-generated-bundle",
+    "description": "This bundle is an way to add comments on any content of a website.",
+    "keywords": ["Comment","Rating"],
+    "homepage": "http://github.com/kitpages/KitpagesUserGeneratedBundle",
+    "type": "symfony-bundle",
+    "license": "BSD",
+    "authors": [
+        {
+            "name": "Philippe Le Van",
+            "homepage": "https://twitter.com/#!/plv"
+        }
+    ],
+    "require": {
+        "symfony/framework-bundle": "2.1.*",
+        "doctrine/orm": ">=2.1.0"
+    },
+    "autoload": {
+        "psr-0": { "Kitpages\\UserGeneratedBundle": "" }
+    },
+    "target-dir": "Kitpages/UserGeneratedBundle"
+}

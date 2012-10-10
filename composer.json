@@ -17,5 +17,6 @@
     },
     "autoload": {
         "psr-0": { "Kitpages\\UserGeneratedBundle": "" }
-    }
+    },
+    "target-dir": "Kitpages/UserGeneratedBundle"
 }

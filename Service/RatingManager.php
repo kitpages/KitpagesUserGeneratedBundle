@@ -5,7 +5,7 @@ use Kitpages\UserGeneratedBundle\Entity\RatingScore;
 use Kitpages\UserGeneratedBundle\Entity\RatingCache;
 
 use Symfony\Component\EventDispatcher\Event;
-use Symfony\Bundle\DoctrineBundle\Registry;
+use Doctrine\Bundle\DoctrineBundle\Registry;
 
 class RatingManager
 {

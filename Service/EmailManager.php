@@ -4,7 +4,7 @@ namespace Kitpages\UserGeneratedBundle\Service;
 use Kitpages\UserGeneratedBundle\Event\UserGeneratedEvent;
 use Kitpages\UserGeneratedBundle\KitpagesUserGeneratedEvents;
 
-use Symfony\Bundle\DoctrineBundle\Registry;
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Templating\EngineInterface;

@@ -34,7 +34,7 @@ class RatingController extends Controller
         $displayResultType = self::DISPLAY_RESULT_TYPE_AVERAGE
     )
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('KitpagesUserGeneratedBundle:RatingCache');
 
         $resultList = array();
@@ -80,7 +80,7 @@ class RatingController extends Controller
             $userName = $this->get('security.context')->getToken()->getUsername();
         }
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('KitpagesUserGeneratedBundle:RatingScore');
 
         $ratingScore = $repo->findByItemReferenceAndUserName($itemReference, $scoreType, $userName);
@@ -141,7 +141,7 @@ class RatingController extends Controller
         $trans = $this->get('translator');
 
         if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
+            $form->bind($request);
             if ($form->isValid()) {
                 $data = $form->getData();
                 $encrypted = $data["tokenEncrypted"];
@@ -165,7 +165,7 @@ class RatingController extends Controller
                     $eventDispatcher = $this->get("event_dispatcher");
                     $event = new UserGeneratedEvent();
 
-                    $em = $this->getDoctrine()->getEntityManager();
+                    $em = $this->getDoctrine()->getManager();
                     $repo = $em->getRepository('KitpagesUserGeneratedBundle:RatingScore');
 
                     $score = $repo->findByItemReferenceAndUserName(

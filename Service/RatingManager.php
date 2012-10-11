@@ -27,7 +27,7 @@ class RatingManager
     ////
     public function createAllRatingCache(){
 
-        $em = $this->doctrine->getEntityManager();
+        $em = $this->doctrine->getManager();
         $query = $em->getConnection()->executeUpdate("
             DELETE FROM usergenerated_ratingcache
         ");
@@ -89,7 +89,7 @@ class RatingManager
     public function onUpdateRatingScore(Event $event){
         $ratingScore = $event->get('ratingScore');
 
-        $em = $this->doctrine->getEntityManager();
+        $em = $this->doctrine->getManager();
 
         $query = $em->getConnection()->executeUpdate("
             UPDATE usergenerated_ratingcache
@@ -110,7 +110,7 @@ class RatingManager
     public function afterRatingScore(Event $event){
         $ratingScore = $event->get('ratingScore');
 
-        $em = $this->doctrine->getEntityManager();
+        $em = $this->doctrine->getManager();
         $repo = $em->getRepository('KitpagesUserGeneratedBundle:RatingCache');
         $ratingCache = $repo->findByItemReferenceAndScore(
             $ratingScore->getItemReference(),

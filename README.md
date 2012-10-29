@@ -63,7 +63,7 @@ public function registerBundles()
         // ...
         new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         new Kitpages\UtilBundle\KitpagesUtilBundle(),
-        new Kitpages\UtilBundle\KitpagesUserGeneratedBundle(),
+        new Kitpages\UserGeneratedBundle\KitpagesUserGeneratedBundle(),
     );
 }
 ```

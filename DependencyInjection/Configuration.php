@@ -45,6 +45,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('default_status')->defaultValue("validated")->end()
                         ->scalarNode('from_email')->cannotBeEmpty()->isRequired()->end()
+                        ->booleanNode('use_recaptcha')->cannotBeEmpty()->defaultValue(false)->end()
                         ->arrayNode('admin_email_list')
                             ->isRequired()
                             ->requiresAtLeastOneElement()

@@ -338,6 +338,10 @@ class CommentController extends Controller
                 "label" => $translator->trans("Content")
             )
         );
+        $useRecaptcha = $this->container->getParameter("kitpages_user_generated.comment.use_recaptcha");
+        if ($useRecaptcha) {
+            $formBuilder->add('recaptcha', 'formextra_recaptcha');
+        }
         $formBuilder->add(
             'userUrl',
             'url',

@@ -13,7 +13,8 @@
     ],
     "require": {
         "symfony/framework-bundle": "2.1.*",
-        "doctrine/orm": ">=2.1.0"
+        "doctrine/orm": ">=2.1.0",
+        "simplethings/form-extra-bundle": "v1.0"
     },
     "autoload": {
         "psr-0": { "Kitpages\\UserGeneratedBundle": "" }

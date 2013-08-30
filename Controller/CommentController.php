@@ -150,6 +150,28 @@ class CommentController extends Controller
                 );
 
                 if ( $check ) {
+
+                    $useCaptcha = $this->container->getParameter("kitpages_user_generated.comment.use_captcha");
+                    if ($useCaptcha) {
+                        $checkCaptcha = $hash->checkHash(
+                            $encrypted,
+                            $data["captcha"],
+                            $data["itemReference"],
+                            $data["itemUrl"],
+                            $data["itemId"],
+                            $data["itemClass"],
+                            $data["extraJson"],
+                            $data["targetUrl"],
+                            $data["userId"],
+                            session_id(),
+                            "commentForm"
+                        );
+                        if (!$checkCaptcha) {
+                            $this->getRequest()->getSession()->setFlash("error", $trans->trans("wrong captcha"));
+                            return $this->redirect($data["targetUrl"]);
+                        }
+                    }
+
                     $comment = new CommentPost();
                     $comment->setContent($data['content']);
                     $comment->setTitle($data['title']);
@@ -338,9 +360,35 @@ class CommentController extends Controller
                 "label" => $translator->trans("Content")
             )
         );
-        $useRecaptcha = $this->container->getParameter("kitpages_user_generated.comment.use_recaptcha");
-        if ($useRecaptcha) {
-            $formBuilder->add('recaptcha', 'formextra_recaptcha');
+        $useCaptcha = $this->container->getParameter("kitpages_user_generated.comment.use_captcha");
+        if ($useCaptcha) {
+            $a = rand(1, 20);
+            $b = rand(1, 20);
+            $formBuilder->add('captcha', 'text', array(
+                "label" => $a . " + " . $b
+            ));
+            $formBuilder->add(
+                "captchaEncrypted",
+                "hidden",
+                array(
+                    "data" => $hash->getHash(
+                        $a+$b,
+                        $itemReference,
+                        $itemUrl,
+                        $itemId,
+                        $itemClass,
+
+                        $extraJson,
+
+                        $targetUrl,
+
+                        $userId,
+                        session_id(),
+                        "commentForm"
+                    )
+                )
+            );
+
         }
         $formBuilder->add(
             'userUrl',

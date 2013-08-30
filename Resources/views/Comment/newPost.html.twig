@@ -8,6 +8,10 @@
     {{ form_row(form.title) }}
     {{ form_row(form.content) }}
 
+    {% if form.offsetExists("captcha") %}
+        {{ form_row(form.captcha) }}
+    {% endif %}
+
     <div style="display: none;">
     {{ form_rest(form) }}
     </div>

@@ -150,11 +150,11 @@ class CommentController extends Controller
                 );
 
                 if ( $check ) {
-
+                    $captchaEncrypted = $data["captchaEncrypted"];
                     $useCaptcha = $this->container->getParameter("kitpages_user_generated.comment.use_captcha");
                     if ($useCaptcha) {
                         $checkCaptcha = $hash->checkHash(
-                            $encrypted,
+                            $captchaEncrypted,
                             $data["captcha"],
                             $data["itemReference"],
                             $data["itemUrl"],

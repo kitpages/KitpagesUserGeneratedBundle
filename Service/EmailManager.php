@@ -4,7 +4,6 @@ namespace Kitpages\UserGeneratedBundle\Service;
 use Kitpages\UserGeneratedBundle\Event\UserGeneratedEvent;
 use Kitpages\UserGeneratedBundle\KitpagesUserGeneratedEvents;
 
-use Symfony\Bundle\DoctrineBundle\Registry;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Templating\EngineInterface;
@@ -12,8 +11,6 @@ use Symfony\Component\Templating\EngineInterface;
 
 class EmailManager
 {
-    /** @var null|\Symfony\Bundle\DoctrineBundle\Registry */
-    protected $doctrine = null;
     /** @var null|LoggerInterface */
     protected $logger = null;
 
@@ -33,7 +30,6 @@ class EmailManager
     protected $adminEmailList = array();
 
     public function __construct(
-        Registry $doctrine,
         LoggerInterface $logger,
         \Swift_Mailer $mailer,
         EngineInterface $templating,
@@ -42,7 +38,6 @@ class EmailManager
         $adminEmailList
     )
     {
-        $this->doctrine = $doctrine;
         $this->logger = $logger;
         $this->templating = $templating;
         $this->dispatcher = $dispatcher;

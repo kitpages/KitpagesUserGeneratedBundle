@@ -19,7 +19,7 @@ class CommentController extends Controller
         $itemReference
     )
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('KitpagesUserGeneratedBundle:CommentPost');
         if($this->get('security.context')->isGranted('ROLE_USER_GENERATED_ADMIN') ) {
             $postList = $repo->findByItemReference($itemReference);
@@ -39,7 +39,7 @@ class CommentController extends Controller
         $itemReference
     )
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('KitpagesUserGeneratedBundle:CommentPost');
 
         // number of post validated
@@ -59,7 +59,7 @@ class CommentController extends Controller
         if (!$this->get('security.context')->isGranted('ROLE_USER_GENERATED_ADMIN') ) {
             return new Response("fail");
         }
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('KitpagesUserGeneratedBundle:CommentPost');
         $post = $repo->find($commentPostId);
         if ($post->getStatus() == CommentPost::STATUS_VALIDATED) {
@@ -131,7 +131,7 @@ class CommentController extends Controller
         $trans = $this->get('translator');
 
         if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
+            $form->bind($request);
             if ($form->isValid()) {
                 $data = $form->getData();
                 $encrypted = $data["tokenEncrypted"];
@@ -203,7 +203,7 @@ class CommentController extends Controller
 
                     if (! $event->isDefaultPrevented() ) {
                         if ($comment->getStatus() != CommentPost::STATUS_DONT_SAVE) {
-                            $em = $this->getDoctrine()->getEntityManager();
+                            $em = $this->getDoctrine()->getManager();
                             $em->persist($comment);
                             $em->flush();
                             $this->getRequest()->getSession()->setFlash("notice", $trans->trans("comment saved"));
